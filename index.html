@@ -38,10 +38,15 @@
         <button @click="surrender">SURRENDER</button>
       </section>
       <section v-else class="container">
-        <h2>Game Over!</h2>
+        <h2 v-if="winner === 'monster'">Game Over!</h2>
         <h3 v-if="winner === 'draw'">It's a Draw 👀</h3>
-        <h3 v-if="winner === 'player'">You won 😉</h3>
-        <h3 v-if="winner === 'monster'">You lost 😢</h3>
+        <h3 v-if="winner === 'player'">You killed the monster 🙂</h3>
+        <h3 v-if="winner === 'monster' && playerHealth <= 0">
+          The monster killed you 🙁
+        </h3>
+        <h4 v-if="winner === 'player'">
+          You won with {{ battleLogs.length / 2 }} moves!
+        </h4>
         <button @click="gameRestart">Restart the Game</button>
       </section>
       <section id="log" class="container">
