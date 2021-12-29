@@ -40,18 +40,27 @@
       <section v-else class="container">
         <h2>Game Over!</h2>
         <h3 v-if="winner === 'draw'">It's a Draw 👀</h3>
-        <h3 v-if="winner === 'player'">Player Win 😉</h3>
-        <h3 v-if="winner === 'monster'">Monster Win 😢</h3>
+        <h3 v-if="winner === 'player'">You won 😉</h3>
+        <h3 v-if="winner === 'monster'">You lost 😢</h3>
         <button @click="gameRestart">Restart the Game</button>
       </section>
       <section id="log" class="container">
         <h2>Battle Log</h2>
         <ul>
-          <li v-for="(battleLog) in battleLogs">
-            {{ battleLog }}
-            <span>{{ }}</span>
-            <span>{{ }}</span>
-            <span>{{ }}</span>
+          <li v-for="battleLog in battleLogs">
+            <span
+              :class="battleLog.actionBy === 'player' ? {'log--player': true} : {'log--monster': true}"
+            >
+              {{ battleLog.actionBy === 'player' ? 'Player ' : 'Monster ' }}
+            </span>
+            <span v-if="battleLog.actionType === 'attack'">
+              attacks and deals
+              <span class="log--damage">{{battleLog.actionValue}}</span> damage
+            </span>
+            <span v-else>
+              heals himself for
+              <span class="log--heal">{{battleLog.actionValue}}</span> HP
+            </span>
           </li>
         </ul>
       </section>

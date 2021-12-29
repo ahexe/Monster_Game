@@ -79,7 +79,6 @@ const app = Vue.createApp({
         },
         surrender() {
             this.winner = "monster";
-            this.battleLogs.unshift('You surrendered 😑')
         },
         getBattleLog(who, what, value) {
             this.battleLogs.unshift({
